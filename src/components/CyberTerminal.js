@@ -23,9 +23,15 @@ const CyberTerminal = () => {
   ]);
 
   const terminalEndRef = useRef(null);
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Skip scrollIntoView on initial mount to prevent page jumping
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    terminalEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [history]);
 
   const executeCommand = (cmdText) => {
