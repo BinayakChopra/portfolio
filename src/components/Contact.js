@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Copy, Check, Send } from 'lucide-react';
+import { Mail, Copy, Check, Send, Loader2 } from 'lucide-react';
 import { GitHubIcon, LinkedInIcon } from './Icons';
 
 const EMAIL = 'binayakchopra34@gmail.com';
@@ -13,14 +13,14 @@ const Contact = () => {
 
   const showToast = useCallback((message) => {
     setToast(message);
-    setTimeout(() => setToast(null), 3000);
+    setTimeout(() => setToast(null), 4000);
   }, []);
 
   const copyEmail = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(EMAIL);
       setCopied(true);
-      showToast('Email copied!');
+      showToast('Email copied to clipboard!');
       setTimeout(() => setCopied(false), 2000);
     } catch {
       showToast('Could not copy email');
@@ -33,31 +33,53 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      showToast('Please fill in all fields.');
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // Send via Formspree (free tier: 50 submissions/month)
-      const response = await fetch('https://formspree.io/f/xanyrpvk', {
+      // Direct form submission to FormSubmit
+      const response = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           message: formData.message,
-          _subject: `Portfolio Contact from ${formData.name}`,
+          _subject: `Portfolio Message from ${formData.name}`,
+          _captcha: 'false',
+          _template: 'table',
         }),
       });
 
-      if (response.ok) {
-        showToast('Message sent successfully! 🚀');
+      const result = await response.json().catch(() => ({}));
+
+      if (response.ok || result.success === 'true' || result.success === true) {
+        showToast('Message sent! Check your inbox (or spam for first activation).');
         setFormData({ name: '', email: '', message: '' });
       } else {
-        showToast('Failed to send message. Please try email link.');
+        // Fallback: Open email client with pre-filled details
+        const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+        const body = encodeURIComponent(
+          `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+        );
+        window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+        showToast('Opening your mail client as fallback...');
       }
-    } catch (error) {
-      showToast('Network error. Please use email link instead.');
+    } catch {
+      // Fallback: Open email client
+      const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      );
+      window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+      showToast('Opening your mail client...');
     } finally {
       setIsSubmitting(false);
     }
@@ -194,11 +216,24 @@ const Contact = () => {
               <button
                 type="submit"
                 className="btn-primary"
-                style={styles.submitBtn}
+                style={{
+                  ...styles.submitBtn,
+                  opacity: isSubmitting ? 0.7 : 1,
+                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                }}
                 disabled={isSubmitting}
               >
-                <Send size={16} />
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" style={{ animation: 'spin 1s linear infinite' }} />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send size={16} />
+                    Send Message
+                  </>
+                )}
               </button>
             </form>
           </motion.div>

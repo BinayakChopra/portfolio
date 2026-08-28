@@ -341,3 +341,16 @@ body::before {
   background-size: 200% 200%;
   animation: gradientShift 8s ease infinite;
 }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
