@@ -30,24 +30,33 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create mailto link with form data
-    const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    const mailtoLink = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+    try {
+      // Send via Formspree (free tier: 50 submissions/month)
+      const response = await fetch('https://formspree.io/f/xanyrpvk', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `Portfolio Contact from ${formData.name}`,
+        }),
+      });
 
-    // Open email client
-    window.location.href = mailtoLink;
-
-    // Show success message and clear form
-    showToast('Opening your email client...');
-    setTimeout(() => {
-      setFormData({ name: '', email: '', message: '' });
-    }, 1000);
+      if (response.ok) {
+        showToast('Message sent successfully! 🚀');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        showToast('Failed to send message. Please try email link.');
+      }
+    } catch (error) {
+      showToast('Network error. Please use email link instead.');
+    }
   };
 
   const contactLinks = [
