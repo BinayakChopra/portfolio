@@ -19,16 +19,19 @@ const CyberScrambleText = ({
       hasAnimated.current = true;
       animateText();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (trigger === 'always') {
       animateText();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text]);
 
   useEffect(() => {
     if (trigger === 'inView') {
+      const node = ref.current;
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -41,16 +44,17 @@ const CyberScrambleText = ({
         { threshold: 0.5 }
       );
 
-      if (ref.current) {
-        observer.observe(ref.current);
+      if (node) {
+        observer.observe(node);
       }
 
       return () => {
-        if (ref.current) {
-          observer.unobserve(ref.current);
+        if (node) {
+          observer.unobserve(node);
         }
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trigger]);
 
   const animateText = () => {

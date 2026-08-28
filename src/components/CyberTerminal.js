@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal, Shield, Cpu, Play, CheckCircle2, AlertTriangle, RefreshCw, Layers } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Terminal, Shield, Cpu, CheckCircle2, RefreshCw } from 'lucide-react';
 import { sounds } from '../utils/soundEffects';
 import Card3D from './Card3D';
 
@@ -15,7 +15,7 @@ const CyberTerminal = () => {
   // Security Scanner State
   const [isScanning, setIsScanning] = useState(false);
   const [scanProgress, setScanProgress] = useState(0);
-  const [scanLogs, setScanLogs] = useState([
+  const [scanLogs] = useState([
     { status: 'ok', msg: 'Core Kernel Integrity: Verified [SHA-256]' },
     { status: 'ok', msg: 'Zero-Day Detection System: Armed & Active' },
     { status: 'ok', msg: 'Firewall State: 0 Breaches Recorded' },

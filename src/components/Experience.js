@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Code2, Shield, Rocket, Trophy, Sparkles } from 'lucide-react';
+import { GraduationCap, Code2, Shield, Rocket, Sparkles } from 'lucide-react';
 import Card3D from './Card3D';
 
 const timelineData = [
