@@ -9,6 +9,7 @@ const Contact = () => {
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [toast, setToast] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const showToast = useCallback((message) => {
     setToast(message);
@@ -32,6 +33,7 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       // Send via Formspree (free tier: 50 submissions/month)
@@ -56,6 +58,8 @@ const Contact = () => {
       }
     } catch (error) {
       showToast('Network error. Please use email link instead.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -187,9 +191,14 @@ const Contact = () => {
                 />
               </div>
 
-              <button type="submit" className="btn-primary" style={styles.submitBtn}>
+              <button
+                type="submit"
+                className="btn-primary"
+                style={styles.submitBtn}
+                disabled={isSubmitting}
+              >
                 <Send size={16} />
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </motion.div>
