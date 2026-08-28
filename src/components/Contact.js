@@ -32,8 +32,22 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    showToast('Message sent! (Demo mode)');
-    setFormData({ name: '', email: '', message: '' });
+
+    // Create mailto link with form data
+    const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    );
+    const mailtoLink = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+
+    // Open email client
+    window.location.href = mailtoLink;
+
+    // Show success message and clear form
+    showToast('Opening your email client...');
+    setTimeout(() => {
+      setFormData({ name: '', email: '', message: '' });
+    }, 1000);
   };
 
   const contactLinks = [
