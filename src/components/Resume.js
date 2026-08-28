@@ -188,23 +188,24 @@ const Resume = () => {
                 }}
               >
                 <a
-                  href="/resume.pdf"
+                  href="/resume.html"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-primary"
                   onClick={() => sounds.playSelect()}
                 >
                   <ExternalLink size={18} />
-                  View Full Document
+                  View Full CV Document
                 </a>
                 <a
-                  href="/resume.pdf"
-                  download="Binayak_Chopra_Resume.pdf"
+                  href="/resume.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-secondary"
                   onClick={() => sounds.playSelect()}
                 >
                   <Download size={18} />
-                  Download CV (PDF)
+                  Print / Save as PDF
                 </a>
               </div>
             </div>

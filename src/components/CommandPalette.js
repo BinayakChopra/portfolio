@@ -18,7 +18,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
     { icon: Briefcase, label: 'Go to Experience', action: () => window.location.hash = '#experience', keywords: 'experience journey timeline' },
     { icon: GraduationCap, label: 'Go to Education', action: () => window.location.hash = '#education', keywords: 'education degree university' },
     { icon: Mail, label: 'Go to Contact', action: () => window.location.hash = '#contact', keywords: 'contact email reach' },
-    { icon: FileDown, label: 'Download Resume', action: () => window.location.hash = '#resume', keywords: 'resume cv download pdf' },
+    { icon: FileDown, label: 'Download / View Resume (CV)', action: () => window.open('/resume.html', '_blank'), keywords: 'resume cv download pdf' },
     {
       icon: theme === 'dark' ? Sun : Moon,
       label: `Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`,
