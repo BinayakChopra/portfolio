@@ -387,6 +387,13 @@ styleTag.textContent = `
   @media (max-width: 768px) {
     #contact [style*="grid-template-columns"] {
       grid-template-columns: 1fr !important;
+      gap: 24px !important;
+    }
+    #contact form.glass-card {
+      padding: 20px 16px !important;
+    }
+    #contact a.glass-card {
+      padding: 14px 16px !important;
     }
   }
   #contact input:focus,

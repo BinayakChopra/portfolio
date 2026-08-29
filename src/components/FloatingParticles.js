@@ -13,9 +13,10 @@ export default function FloatingParticles() {
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    // Check reduced motion preference
+    // Check reduced motion preference or mobile screen to save battery & CPU
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    const isMobile = window.innerWidth < 768 || ('ontouchstart' in window);
+    if (prefersReducedMotion || isMobile) return;
 
     const mouse = { x: -1000, y: -1000, radius: 140 };
 

@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 const Card3D = ({ children, className = '', style = {}, intensity = 15 }) => {
   const ref = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
+  const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 768);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -18,7 +19,7 @@ const Card3D = ({ children, className = '', style = {}, intensity = 15 }) => {
   });
 
   const handleMouseMove = (e) => {
-    if (!ref.current) return;
+    if (isTouchDevice || !ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -31,6 +32,14 @@ const Card3D = ({ children, className = '', style = {}, intensity = 15 }) => {
     x.set(0);
     y.set(0);
   };
+
+  if (isTouchDevice) {
+    return (
+      <div ref={ref} style={style} className={className}>
+        {children}
+      </div>
+    );
+  }
 
   return (
     <motion.div

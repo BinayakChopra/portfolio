@@ -165,6 +165,7 @@ const CyberTerminal = () => {
           >
             {/* Terminal Window Header Bar */}
             <div
+              className="terminal-header-bar"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -172,6 +173,8 @@ const CyberTerminal = () => {
                 padding: '16px 24px',
                 background: 'rgba(0, 0, 0, 0.25)',
                 borderBottom: '1px solid var(--card-border)',
+                flexWrap: 'wrap',
+                gap: '12px',
               }}
             >
               {/* Traffic Light Dots */}
@@ -180,6 +183,7 @@ const CyberTerminal = () => {
                 <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ffbd2e' }} />
                 <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#27c93f' }} />
                 <span
+                  className="terminal-hostname"
                   style={{
                     marginLeft: '12px',
                     fontSize: '0.813rem',
@@ -425,6 +429,17 @@ const CyberTerminal = () => {
           </div>
         </Card3D>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .terminal-header-bar {
+            padding: 12px 16px !important;
+          }
+          .terminal-hostname {
+            display: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

@@ -81,9 +81,10 @@ const Experience = () => {
         </motion.div>
 
         {/* Timeline Container */}
-        <div style={{ position: 'relative', maxWidth: '840px', margin: '0 auto' }}>
+        <div className="timeline-wrapper" style={{ position: 'relative', maxWidth: '840px', margin: '0 auto' }}>
           {/* Glowing Center / Left Line */}
           <div
+            className="timeline-line"
             style={{
               position: 'absolute',
               top: '20px',
@@ -105,10 +106,12 @@ const Experience = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
                   transition={{ duration: 0.6, delay: idx * 0.15 }}
+                  className="timeline-item"
                   style={{ display: 'flex', gap: '28px', alignItems: 'flex-start' }}
                 >
                   {/* Glowing Node on Timeline */}
                   <div
+                    className="timeline-node"
                     style={{
                       width: '50px',
                       height: '50px',
@@ -128,10 +131,10 @@ const Experience = () => {
                   </div>
 
                   {/* Card Content */}
-                  <div style={{ flex: 1 }}>
+                  <div style={{ flex: 1, minWidth: 0 }}>
                     <Card3D intensity={8}>
                       <div
-                        className="glass-card"
+                        className="glass-card timeline-card-inner"
                         style={{
                           padding: '28px',
                           borderLeft: `4px solid ${item.color}`,
@@ -214,6 +217,29 @@ const Experience = () => {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .timeline-line {
+            left: 16px !important;
+          }
+          .timeline-item {
+            gap: 14px !important;
+          }
+          .timeline-node {
+            width: 36px !important;
+            height: 36px !important;
+          }
+          .timeline-node svg {
+            width: 16px !important;
+            height: 16px !important;
+          }
+          .timeline-card-inner {
+            padding: 18px 14px !important;
+            border-radius: 16px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

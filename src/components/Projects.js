@@ -90,8 +90,8 @@ const Projects = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
-            gap: '32px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+            gap: '24px',
           }}
           className="projects-grid"
         >
@@ -105,7 +105,7 @@ const Projects = () => {
             >
               <Card3D
                 intensity={12}
-                className="glass-card"
+                className="glass-card project-card-inner"
                 style={{
                   height: '100%',
                   display: 'flex',
@@ -250,6 +250,10 @@ const Projects = () => {
         @media (max-width: 640px) {
           .projects-grid {
             grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          .project-card-inner {
+            padding: 22px 18px !important;
           }
         }
       `}</style>

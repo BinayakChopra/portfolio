@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 
 const NAV_LINKS = [
-  { label: 'Home', href: '#hero' },
+  { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
   { label: 'Projects', href: '#projects' },
@@ -16,7 +16,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState('home');
   const [mobileOpen, setMobileOpen] = useState(false);
 
   /* ── scroll shadow ── */
@@ -80,8 +80,8 @@ export default function Navbar() {
         <div style={styles.inner}>
           {/* logo */}
           <a
-            href="#hero"
-            onClick={(e) => handleClick(e, '#hero')}
+            href="#home"
+            onClick={(e) => handleClick(e, '#home')}
             style={styles.logo}
             aria-label="Home"
           >

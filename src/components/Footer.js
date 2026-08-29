@@ -4,6 +4,7 @@ import { GitHubIcon, LinkedInIcon } from './Icons';
 export default function Footer() {
   return (
     <footer
+      className="footer-root"
       style={{
         borderTop: '1px solid var(--card-border)',
         backgroundColor: 'var(--bg-secondary)',
@@ -96,6 +97,15 @@ export default function Footer() {
           Built with curiosity, code & caffeine.
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .footer-root {
+            margin-top: 3rem !important;
+            padding: 2.5rem 1rem !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 }

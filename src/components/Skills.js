@@ -73,9 +73,10 @@ const Skills = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '24px',
           }}
+          className="skills-grid"
         >
           {skillGroups.map((group, idx) => {
             const Icon = group.icon;
@@ -89,7 +90,7 @@ const Skills = () => {
               >
                 <Card3D
                   intensity={10}
-                  className="glass-card"
+                  className="glass-card skill-card-inner"
                   style={{
                     height: '100%',
                     padding: '28px',
@@ -177,6 +178,18 @@ const Skills = () => {
           })}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .skills-grid {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+          .skill-card-inner {
+            padding: 20px 16px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

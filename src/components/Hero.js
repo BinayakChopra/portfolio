@@ -42,6 +42,7 @@ const Hero = () => {
   return (
     <section
       id="home"
+      className="hero-section"
       style={{
         minHeight: '100vh',
         display: 'flex',
@@ -265,7 +266,7 @@ const Hero = () => {
             {/* 3D Glass Profile Card */}
             <Card3D
               intensity={20}
-              className="glass-card"
+              className="glass-card hero-profile-card"
               style={{
                 width: '100%',
                 maxWidth: '420px',
@@ -437,12 +438,25 @@ const Hero = () => {
 
       <style>{`
         @media (max-width: 968px) {
+          .hero-section {
+            padding: 90px 0 40px !important;
+            min-height: auto !important;
+          }
           .hero-grid {
             grid-template-columns: 1fr !important;
-            gap: 40px !important;
+            gap: 36px !important;
           }
           .floating-mini-badge {
             display: none !important;
+          }
+          .hero-profile-card {
+            padding: 24px 20px !important;
+            max-width: 100% !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .hero-section {
+            padding: 80px 0 30px !important;
           }
         }
       `}</style>

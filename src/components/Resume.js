@@ -50,7 +50,7 @@ const Resume = () => {
         <div style={{ maxWidth: '720px', margin: '0 auto' }}>
           <Card3D intensity={12}>
             <div
-              className="glass-card"
+              className="glass-card resume-card-inner"
               onMouseEnter={handleScanTrigger}
               style={{
                 padding: '40px',
@@ -212,6 +212,14 @@ const Resume = () => {
           </Card3D>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .resume-card-inner {
+            padding: 24px 18px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

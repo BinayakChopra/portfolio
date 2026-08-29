@@ -6,8 +6,10 @@ export default function useCursorGlow() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Disable on touch devices and small screens
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 768;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion || isTouchDevice) return;
 
     const updatePosition = (e) => {
       setPosition({ x: e.clientX, y: e.clientY });

@@ -101,6 +101,7 @@ const About = () => {
 
           {/* Right: Stat Cards Grid */}
           <div
+            className="about-stats-grid"
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(2, 1fr)',
@@ -119,7 +120,7 @@ const About = () => {
                 >
                   <Card3D
                     intensity={8}
-                    className="glass-card"
+                    className="glass-card about-stat-card"
                     style={{
                       padding: '24px',
                       display: 'flex',
@@ -181,6 +182,21 @@ const About = () => {
           .about-grid {
             grid-template-columns: 1fr !important;
             gap: 32px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .about-stats-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 12px !important;
+          }
+          .about-stat-card {
+            padding: 16px 12px !important;
+            min-height: auto !important;
+          }
+        }
+        @media (max-width: 360px) {
+          .about-stats-grid {
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>

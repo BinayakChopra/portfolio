@@ -28,65 +28,76 @@ const SpatialDock = ({ onCommandPaletteOpen }) => {
   };
 
   return (
-    <motion.div
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, delay: 1 }}
-      onMouseMove={(e) => mouseX.set(e.pageX)}
-      onMouseLeave={() => mouseX.set(Infinity)}
-      style={{
-        position: 'fixed',
-        bottom: '24px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 9999,
-        display: 'flex',
-        gap: '8px',
-        padding: '12px 16px',
-        background: 'var(--glass-bg)',
-        backdropFilter: 'blur(24px) saturate(1.8)',
-        WebkitBackdropFilter: 'blur(24px) saturate(1.8)',
-        border: '1px solid var(--glass-border)',
-        borderRadius: '24px',
-        boxShadow: '0 12px 48px var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
-      }}
-    >
-      {dockItems.map((item, idx) => (
-        <DockIcon
-          key={item.label}
-          mouseX={mouseX}
-          icon={item.icon}
-          label={item.label}
-          href={item.href}
-        />
-      ))}
-
-      <div style={{ width: '1px', height: '48px', background: 'var(--card-border)', margin: '0 4px' }} />
-
-      <DockIconButton
-        mouseX={mouseX}
-        icon={Command}
-        label="Command Palette"
-        onClick={() => {
-          onCommandPaletteOpen?.();
-          sounds.playSelect();
+    <>
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, delay: 1 }}
+        onMouseMove={(e) => mouseX.set(e.pageX)}
+        onMouseLeave={() => mouseX.set(Infinity)}
+        className="spatial-dock-container"
+        style={{
+          position: 'fixed',
+          bottom: '24px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 9999,
+          display: 'flex',
+          gap: '8px',
+          padding: '12px 16px',
+          background: 'var(--glass-bg)',
+          backdropFilter: 'blur(24px) saturate(1.8)',
+          WebkitBackdropFilter: 'blur(24px) saturate(1.8)',
+          border: '1px solid var(--glass-border)',
+          borderRadius: '24px',
+          boxShadow: '0 12px 48px var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.15)',
         }}
-      />
+      >
+        {dockItems.map((item, idx) => (
+          <DockIcon
+            key={item.label}
+            mouseX={mouseX}
+            icon={item.icon}
+            label={item.label}
+            href={item.href}
+          />
+        ))}
 
-      <DockIconButton
-        mouseX={mouseX}
-        icon={Palette}
-        label="Toggle Theme"
-        onClick={handleThemeToggle}
-      />
+        <div style={{ width: '1px', height: '48px', background: 'var(--card-border)', margin: '0 4px' }} />
 
-      <DockIconButton
-        mouseX={mouseX}
-        icon={soundEnabled ? Volume2 : VolumeX}
-        label={soundEnabled ? 'Sound On' : 'Sound Off'}
-        onClick={handleSoundToggle}
-      />
-    </motion.div>
+        <DockIconButton
+          mouseX={mouseX}
+          icon={Command}
+          label="Command Palette"
+          onClick={() => {
+            onCommandPaletteOpen?.();
+            sounds.playSelect();
+          }}
+        />
+
+        <DockIconButton
+          mouseX={mouseX}
+          icon={Palette}
+          label="Toggle Theme"
+          onClick={handleThemeToggle}
+        />
+
+        <DockIconButton
+          mouseX={mouseX}
+          icon={soundEnabled ? Volume2 : VolumeX}
+          label={soundEnabled ? 'Sound On' : 'Sound Off'}
+          onClick={handleSoundToggle}
+        />
+      </motion.div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .spatial-dock-container {
+            display: none !important;
+          }
+        }
+      `}</style>
+    </>
   );
 };
 

@@ -50,6 +50,7 @@ export default function ScrollProgress() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: progress > 5 ? 1 : 0, scale: progress > 5 ? 1 : 0.8 }}
         transition={{ duration: 0.3 }}
+        className="scroll-progress-circle"
         style={{
           position: 'fixed',
           bottom: '32px',
@@ -118,6 +119,14 @@ export default function ScrollProgress() {
           {progress}%
         </div>
       </motion.div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .scroll-progress-circle {
+            display: none !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

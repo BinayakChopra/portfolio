@@ -5,6 +5,8 @@ import useCursorGlow from '../hooks/useCursorGlow';
 export default function CursorFollower() {
   const { position, isPointer, isVisible } = useCursorGlow();
 
+  const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth < 768);
+
   const springConfig = { damping: 25, stiffness: 250, mass: 0.1 };
   const smoothX = useSpring(position.x, springConfig);
   const smoothY = useSpring(position.y, springConfig);
@@ -14,7 +16,7 @@ export default function CursorFollower() {
     smoothY.set(position.y);
   }, [position.x, position.y, smoothX, smoothY]);
 
-  if (!isVisible) return null;
+  if (!isVisible || isTouchDevice) return null;
 
   return (
     <>

@@ -54,7 +54,7 @@ const Education = () => {
           >
             <Card3D intensity={14}>
               <div
-                className="glass-card"
+                className="glass-card education-card-inner"
                 style={{
                   padding: '40px',
                   position: 'relative',
@@ -66,6 +66,7 @@ const Education = () => {
               >
                 {/* Degree Icon Header */}
                 <div
+                  className="education-header"
                   style={{
                     display: 'flex',
                     alignItems: 'flex-start',
@@ -75,6 +76,7 @@ const Education = () => {
                   }}
                 >
                   <div
+                    className="education-avatar"
                     style={{
                       width: '72px',
                       height: '72px',
@@ -248,6 +250,26 @@ const Education = () => {
           </motion.div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .education-card-inner {
+            padding: 24px 18px !important;
+          }
+          .education-header {
+            gap: 16px !important;
+          }
+          .education-avatar {
+            width: 52px !important;
+            height: 52px !important;
+            border-radius: 14px !important;
+          }
+          .education-avatar svg {
+            width: 26px !important;
+            height: 26px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };
